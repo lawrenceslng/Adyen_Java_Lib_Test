@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.mycompany.app.AppTest" time="0.14" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="14"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\lawre\Desktop\Coding\Java\Adyen\my-app\target\test-classes;C:\Users\lawre\Desktop\Coding\Java\Adyen\my-app\target\classes;C:\Users\lawre\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\lawre\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\lawre\.m2\repository\com\adyen\adyen-java-api-library\5.0.0\adyen-java-api-library-5.0.0.jar;C:\Users\lawre\.m2\repository\commons-codec\commons-codec\1.14\commons-codec-1.14.jar;C:\Users\lawre\.m2\repository\com\google\code\gson\gson\2.8.6\gson-2.8.6.jar;C:\Users\lawre\.m2\repository\javax\xml\crypto\jsr105-api\1.0.1\jsr105-api-1.0.1.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="America/Los_Angeles"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="14"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-14\bin"/>
+    <property name="sun.java.command" value="C:\Users\lawre\AppData\Local\Temp\surefire14393593368852916110\surefirebooter17031317464395506685.jar C:\Users\lawre\AppData\Local\Temp\surefire14393593368852916110 2020-03-26T23-42-52_255-jvmRun1 surefire4293560729471046115tmp surefire_09573279188013839559tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\lawre\Desktop\Coding\Java\Adyen\my-app\target\test-classes;C:\Users\lawre\Desktop\Coding\Java\Adyen\my-app\target\classes;C:\Users\lawre\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\lawre\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\lawre\.m2\repository\com\adyen\adyen-java-api-library\5.0.0\adyen-java-api-library-5.0.0.jar;C:\Users\lawre\.m2\repository\commons-codec\commons-codec\1.14\commons-codec-1.14.jar;C:\Users\lawre\.m2\repository\com\google\code\gson\gson\2.8.6\gson-2.8.6.jar;C:\Users\lawre\.m2\repository\javax\xml\crypto\jsr105-api\1.0.1\jsr105-api-1.0.1.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\lawre"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2020-03-17"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-14"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\lawre\Desktop\Coding\Java\Adyen\my-app"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\lawre\AppData\Local\Temp\surefire14393593368852916110\surefirebooter17031317464395506685.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="14+36-1461"/>
+    <property name="user.name" value="lawre"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\lawre\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\lawre\AppData\Local\Temp\"/>
+    <property name="java.version" value="14"/>
+    <property name="user.dir" value="C:\Users\lawre\Desktop\Coding\Java\Adyen\my-app"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-14\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\lawre\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\lawre\bin;C:\Users\lawre\AppData\Local\Programs\Python\Python37;C:\Users\lawre\AppData\Local\Programs\Python\Python37\Scripts;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet;C:\Program Files\MySQL\MySQL Utilities 1.6;C:\Program Files (x86)\Yarn\bin;C:\Program Files\Dart\dart-sdk\bin;C:\Program Files\nodejs;C:\ProgramData\chocolatey\bin;C:\Program Files\MongoDB\Server\4.0\bin;C:\Program Files\apache-maven-3.6.3-bin\apache-maven-3.6.3\bin;C:\Program Files\Java\jdk-14\bin;C:\Users\lawre\AppData\Local\Programs\Python\Python37\Scripts;C:\Users\lawre\AppData\Local\Programs\Python\Python37;C:\Users\lawre\AppData\Local\Programs\Python\Python38\Scripts;C:\Users\lawre\AppData\Local\Programs\Python\Python38;C:\Users\lawre\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\heroku\bin;C:\Users\lawre\AppData\Local\Yarn\bin;C:\Users\lawre\AppData\Local\GitHubDesktop\bin;C:\Users\lawre\AppData\Local\Microsoft\WindowsApps;C:\Users\lawre\AppData\Roaming\npm;C:\Program Files\apache-maven-3.6.3\apache-maven\src\bin;C:\Program Files\apache-maven-3.6.3-bin\apache-maven-3.6.3\bin;C:\Program Files\Java\jdk-14\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="14+36-1461"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="58.0"/>
+  </properties>
+  <testcase name="shouldAnswerWithTrue" classname="com.mycompany.app.AppTest" time="0.005"/>
+</testsuite>
