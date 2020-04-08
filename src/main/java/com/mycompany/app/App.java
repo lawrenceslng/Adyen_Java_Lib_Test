@@ -74,27 +74,36 @@ public class App {
 //        System.out.println(terminalAPIResponse.getSaleToPOIResponse().getPaymentResponse().getPOIData().getPOITransactionID().getTransactionID());
         tenderReference = terminalAPIResponse.getSaleToPOIResponse().getPaymentResponse().getPOIData().getPOITransactionID().getTransactionID().substring(0,19);
         pspReference = terminalAPIResponse.getSaleToPOIResponse().getPaymentResponse().getPOIData().getPOITransactionID().getTransactionID().substring(20);
+        System.out.println("Original PSP Reference: " + pspReference);
         Base64.Decoder decoder = Base64.getDecoder();
         String decodedData = new String(decoder.decode(terminalAPIResponse.getSaleToPOIResponse().getPaymentResponse().getResponse().getAdditionalResponse()));
-        System.out.println("Not decipherd: " + terminalAPIResponse.getSaleToPOIResponse().getPaymentResponse().getResponse().getAdditionalResponse());
-        System.out.println("Decoded Data: " + decodedData);
+//        System.out.println("Not decipherd: " + terminalAPIResponse.getSaleToPOIResponse().getPaymentResponse().getResponse().getAdditionalResponse());
+//        System.out.println("Decoded Data: " + decodedData);
         String[] tokens = decodedData.split(",");
         for (int i = 0; i < tokens.length; i++){
             if(tokens[i].contains("adjustAuthorisationData")) {
                 String[] parsed = tokens[i].split("\"");
-                System.out.println("auth adjust blob: " + parsed[3]);
+//                System.out.println("auth adjust blob: " + parsed[3]);
 //                System.out.println(parsed[3].replaceAll("\\",""));
+                String str = parsed[3];
                 String actualAuthBlob = "";
-                System.out.println("after removing \\: " + actualAuthBlob);
-                adjustAuthData = parsed[3];
-                System.out.println(adjustAuthData);
+                for(int j = 0; j < str.length(); j++)
+                {
+                    char c = str.charAt(j);
+                    if((int)c != 92){
+                        actualAuthBlob = actualAuthBlob + str.charAt(j);
+                    }
+                }
+//                System.out.println("after removing \\: " + actualAuthBlob);
+                adjustAuthData = actualAuthBlob;
+//                System.out.println(adjustAuthData);
             }
         }
-        System.out.println(adjustAuthData.isEmpty());
-//        if(adjustAuthData.isEmpty())
-//        {
-//            adjustAuthData = "";
-//        }
+//        System.out.println(adjustAuthData.isEmpty());
+        if(adjustAuthData.isEmpty())
+        {
+            adjustAuthData = "";
+        }
         result = terminalAPIResponse.getSaleToPOIResponse().getPaymentResponse().getResponse().getResult().toString();
 //        System.out.println(tenderReference);
 //        System.out.println(pspReference);
@@ -110,14 +119,23 @@ public class App {
             case "2":
                 System.out.println("WIP");
                 modificationResult = authAdjustReqSync(client, pspReference, adjustAuthData);
-                return;
+                break;
             default:
                 System.out.println("Exiting...");
                 return;
         }
         if(modificationResult != null)
         {
-            System.out.println(modificationResult.getResponse());
+            if(choice == "1")
+            {
+                System.out.println("Modification Response: " + modificationResult.getResponse());
+            }
+            else if(choice == "2")
+            {
+                System.out.println("Modification Response: " + modificationResult.getResponse());
+                System.out.println("Modification PSP Reference: " + modificationResult.getPspReference());
+                System.out.print("Modification Response Additional Data: " + modificationResult.getAdditionalData());
+            }
         }
         System.out.println("End");
     }
@@ -262,8 +280,25 @@ public class App {
     }
 
     private static ModificationResult authAdjustReqSync(Client client, String pspReference, String adjustAuthData) {
-
-        return null;
+        AdjustAuthorisationRequest adjustAuthReq = new AdjustAuthorisationRequest();
+        com.adyen.model.Amount amount = new com.adyen.model.Amount();
+        amount.setCurrency("USD");
+        amount.setValue((long) 1200);
+        adjustAuthReq.setModificationAmount(amount);
+        adjustAuthReq.setMerchantAccount("LN_Test_Account");
+        adjustAuthReq.setOriginalReference(pspReference);
+        adjustAuthReq.setReference("Auth_Adjust");
+        Map<String, String> adjustAuthMap = new HashMap<String, String>();
+        adjustAuthMap.put("adjustAuthorisationData", adjustAuthData);
+        adjustAuthReq.setAdditionalData(adjustAuthMap);
+        Modification mod = new Modification(client);
+        try {
+            ModificationResult modRes = mod.adjustAuthorization(adjustAuthReq);
+            return modRes;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
     }
 }
 
