@@ -29,18 +29,23 @@ import java.util.Scanner;
 
 
 public class App {
+
     private static String protocolV = "3.0";
     private static String saleId = "POSSystemJava";
     private static int randomNum = ThreadLocalRandom.current().nextInt(0, 1000000000);
     private static String serviceId = Integer.toString(randomNum);
     private static String transactionId = "LNT_Java";
-    private static String poiId = "V400m-346388542";
+    private static String poiId;
 
-    public static void main(String[] args) throws InterruptedException {
-        System.out.println("Start of Main");
+    public static <Int> void main(String[] args) throws InterruptedException {
         Dotenv dotenv = Dotenv.load();
+        poiId = dotenv.get("POIID");
         Scanner menu = new Scanner(System.in);
         System.out.println("Demo Payment Flow with Java API Library");
+        System.out.println("---------------------------------------------------------------");
+        System.out.println("Merchant Account: " + dotenv.get("MERCHANT_NAME"));
+        System.out.println("Terminal: " + dotenv.get("POIID"));
+        System.out.println("---------------------------------------------------------------");
         System.out.println("Enter 1 for normal payment, 2 for Pre-Authorisation");
         String choice = menu.nextLine();
         Client client = new Client(dotenv.get("API_KEY"), Environment.TEST);
@@ -60,7 +65,7 @@ public class App {
         }
         String tenderReference;
         String pspReference;
-        String adjustAuthData;
+        String adjustAuthData = "";
         String result;
         if(terminalAPIResponse.getSaleToPOIResponse().getPaymentResponse().getPOIData().getPOITransactionID().getTransactionID().length() < 20){
             System.out.println("Some error happening, exiting...");
@@ -71,19 +76,25 @@ public class App {
         pspReference = terminalAPIResponse.getSaleToPOIResponse().getPaymentResponse().getPOIData().getPOITransactionID().getTransactionID().substring(20);
         Base64.Decoder decoder = Base64.getDecoder();
         String decodedData = new String(decoder.decode(terminalAPIResponse.getSaleToPOIResponse().getPaymentResponse().getResponse().getAdditionalResponse()));
+        System.out.println("Not decipherd: " + terminalAPIResponse.getSaleToPOIResponse().getPaymentResponse().getResponse().getAdditionalResponse());
         System.out.println("Decoded Data: " + decodedData);
         String[] tokens = decodedData.split(",");
         for (int i = 0; i < tokens.length; i++){
             if(tokens[i].contains("adjustAuthorisationData")) {
                 String[] parsed = tokens[i].split("\"");
-                System.out.println(parsed[3]);
-                System.out.println(parsed[3].replaceAll("\\",""));
+                System.out.println("auth adjust blob: " + parsed[3]);
+//                System.out.println(parsed[3].replaceAll("\\",""));
+                String actualAuthBlob = "";
+                System.out.println("after removing \\: " + actualAuthBlob);
                 adjustAuthData = parsed[3];
                 System.out.println(adjustAuthData);
             }
         }
-
-        adjustAuthData = "";
+        System.out.println(adjustAuthData.isEmpty());
+//        if(adjustAuthData.isEmpty())
+//        {
+//            adjustAuthData = "";
+//        }
         result = terminalAPIResponse.getSaleToPOIResponse().getPaymentResponse().getResponse().getResult().toString();
 //        System.out.println(tenderReference);
 //        System.out.println(pspReference);
@@ -108,23 +119,6 @@ public class App {
         {
             System.out.println(modificationResult.getResponse());
         }
-
-//
-//        Base64.Decoder decoder = Base64.getDecoder();
-//        String decodedData = new String(decoder.decode(terminalAPIResponse.getSaleToPOIResponse().getPaymentResponse().getResponse().getAdditionalResponse()));
-//        System.out.println("Decoded Data: " + decodedData);
-//        String[] tokens = decodedData.split(",");
-//        String adjustAuthData = "test";
-//        for (int i = 0; i < tokens.length; i++){
-//            if(tokens[i].contains("adjustAuthorisationData")) {
-//                String[] parsed = tokens[i].split("\"");
-//                System.out.println(parsed[3]);
-//                System.out.println(parsed[3].replaceAll("\\",""));
-//                adjustAuthData = parsed[3];
-//                System.out.println(adjustAuthData);
-//            }
-//        }
-
         System.out.println("End");
     }
 
